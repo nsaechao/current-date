@@ -1,0 +1,66 @@
+runtimeVersion: 0.4.1
+name: Current Date
+description: ''
+type: com.dynaboard/project
+nodes:
+  ROOT_NODE:
+    type: ROOT_NODE
+    name: ROOT_NODE
+    slots:
+      pages:
+        - nodeID: adfaa2ba-88af-4cb2-b5d4-2cda6d656623
+          orderKey: a0
+      resources:
+        - nodeID: a9d2e0a3-bd65-48a5-82c0-b7205596111d
+          orderKey: a0
+        - nodeID: 6c6ef797-fc42-4226-8941-609ccaf2e3d6
+          orderKey: a1
+      functions:
+        - nodeID: b4cba9ea-fe93-45a1-ab4c-7e6c4868c561
+          orderKey: a0
+  219add64-2563-44cd-8df1-4a54d746ebc5:
+    type: FUNCTION
+    name: function1
+    properties:
+      action:
+        code: return new Date()
+        targetNode:
+          ref: com.dynaboard.globals:tsclient
+        actionType: CALL_CLIENT_FUNCTION
+      callingSemantics: REACTIVE
+  514daad7-93d4-4fb8-88d7-79613ffd83e0:
+    type: TEXT
+    name: text1
+    properties:
+      width: '2'
+      height: '2'
+      value: '{{function1.data}}'
+  6c6ef797-fc42-4226-8941-609ccaf2e3d6:
+    type: RESOURCE/TYPESCRIPT_SERVER
+    name: TypeScriptServer1
+  a9d2e0a3-bd65-48a5-82c0-b7205596111d:
+    type: RESOURCE/HTTP_ENDPOINT
+    name: HttpEndpoint1
+    properties:
+      onRequest:
+        function:
+          ref: b4cba9ea-fe93-45a1-ab4c-7e6c4868c561
+  adfaa2ba-88af-4cb2-b5d4-2cda6d656623:
+    type: PAGE
+    name: index
+    slots:
+      canvas:
+        - nodeID: 514daad7-93d4-4fb8-88d7-79613ffd83e0
+          orderKey: a0
+      functions:
+        - nodeID: 219add64-2563-44cd-8df1-4a54d746ebc5
+          orderKey: a0
+  b4cba9ea-fe93-45a1-ab4c-7e6c4868c561:
+    type: FUNCTION
+    name: function1
+    properties:
+      action:
+        code: return new Date()
+        targetNode:
+          ref: 6c6ef797-fc42-4226-8941-609ccaf2e3d6
+        actionType: CALL_SERVER_FUNCTION
